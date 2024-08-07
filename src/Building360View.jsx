@@ -1,4 +1,4 @@
- import  { useState, useRef, useEffect } from 'react';
+import  { useState, useRef, useEffect } from 'react';
 import React360Viewer from 'react-360-view';
 
 const Building360View = () => {
@@ -6,11 +6,33 @@ const Building360View = () => {
   const viewerRef = useRef(null);
   const isDragging = useRef(false);
 
-  // Generate image paths and corresponding SVG overlays
-  const imagePaths = Array.from({ length: 24 }, (_, index) => ({
-    jpg: `/images/jpg/image${index + 1}.jpg`,
-    svgs: Array.from({ length: 9 }, (_, i) => `/images/24-HD-SVG/image${i + 1}/overlay${index + 1}.svg`),
-  }));
+  // Define a custom mapping for JPG and corresponding SVG overlays
+  const imagePaths = [
+    {
+      jpg: '/images/jpg/image1.jpg',
+      svgs: [
+        '/images/24-HD-SVG/Image_A.01_Avaliable_80_1_01/Verdana-Apartments.Apartment_1001_00000.svg',
+        '/images/24-HD-SVG/Image_A.04_Avaliable_100_2_03/Verdana-Apartments-Apartment_3004.000.svg',
+        '/images/24-HD-SVG/Image_A.05_Avaliable_90_2_09/Verdana-Apartments-Apartment_9005.000.svg',
+        '/images/24-HD-SVG/Image_A.06_Avaliable_90_2_06/Verdana-Apartments-Apartment_6006.000.svg',
+        '/images/24-HD-SVG/Image_A.07_Avaliable_90_2_10/Verdana-Apartments-Apartment_10006.000.svg',
+'/images/24-HD-SVG/Image_A.07_Avaliable_110_3_12/Verdana-Apartments-Apartment_12007.000.svg',
+        '/images/24-HD-SVG/Image_A.08_Avaliable_110_3_03/Verdana-Apartments-Apartment_3008.000.svg',
+        '/images/24-HD-SVG/Image_A.09_Avaliable_90_2_06/Verdana-Apartments-Apartment_3008.000.svg',
+        '/images/24-HD-SVG/Image_A.10_Avaliable_90_2_05/Verdana-Apartments-Apartment_5010.000.svg',
+      ],
+    },
+    {
+      jpg: '/images/jpg/image2.jpg',
+      svgs: [
+        '/images/24-HD-SVG/image1/overlay2.svg',
+        '/images/24-HD-SVG/image2/overlay2.svg',
+        '/images/24-HD-SVG/image3/overlay2.svg',
+        // Add more paths as needed
+      ],
+    },
+    // Add more mappings for other images
+  ];
 
   // Handle mouse events for drag simulation
   useEffect(() => {
@@ -20,9 +42,7 @@ const Building360View = () => {
 
     const handleMouseMove = (event) => {
       if (isDragging.current && viewerRef.current) {
-        // Calculate the new image index based on mouse movement
-        // Replace this logic with the actual calculation
-        const index = Math.floor((event.clientX / window.innerWidth) * 24); // Example logic
+        const index = Math.floor((event.clientX / window.innerWidth) * 24);
         setCurrentImageIndex(index % 24); // Ensure index is within bounds
       }
     };
@@ -52,7 +72,7 @@ const Building360View = () => {
         speed={50000} // Speed of rotation
       />
       <div className="overlay-container">
-        {imagePaths[currentImageIndex]?.svgs.map((svgSrc, idx) => (
+        {imagePaths[currentImageIndex % imagePaths.length]?.svgs.map((svgSrc, idx) => (
           <img
             key={idx}
             src={svgSrc}
@@ -67,6 +87,7 @@ const Building360View = () => {
 };
 
 export default Building360View;
+
 
 //.................................................
 
