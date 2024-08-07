@@ -1,0 +1,62 @@
+@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@400;700&family=Roboto+Condensed:wght@400;700&display=swap");
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-family: "Quicksand", sans-serif;
+ 
+ 
+}
+
+ /* Add this CSS to your stylesheet */
+ 
+.v360-viewport{
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+/* Building360View.css */
+.three-sixty-container {
+ 
+  height: auto;
+ 
+  margin: auto;
+  overflow: hidden;
+  cursor: grab;
+}
+
+.three-sixty-container:active {
+  cursor: grabbing;
+}
+/* Building360View.css */
+.three-sixty-container {
+  position: relative;
+  width: 100%;
+  height: auto;
+   margin: auto;
+  overflow: hidden;
+}
+ 
+image-overlay-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.jpg-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Adjust if needed */
+}
+
+.svg-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Adjust if needed */
+  pointer-events: none; /* Allow interaction with the viewer below */
+}
