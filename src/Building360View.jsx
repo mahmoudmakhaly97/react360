@@ -1,5 +1,6 @@
 import  { useState, useRef, useEffect } from 'react';
 import React360Viewer from 'react-360-view';
+import { imagePaths } from  './imagePath';
 
 const Building360View = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -7,32 +8,6 @@ const Building360View = () => {
   const isDragging = useRef(false);
 
   // Define a custom mapping for JPG and corresponding SVG overlays
-  const imagePaths = [
-    {
-      jpg: '/images/jpg/image1.jpg',
-      svgs: [
-        '/images/24-HD-SVG/Image_A.01_Avaliable_80_1_01/Verdana-Apartments.Apartment_1001_00000.svg',
-        '/images/24-HD-SVG/Image_A.04_Avaliable_100_2_03/Verdana-Apartments-Apartment_3004.000.svg',
-        '/images/24-HD-SVG/Image_A.05_Avaliable_90_2_09/Verdana-Apartments-Apartment_9005.000.svg',
-        '/images/24-HD-SVG/Image_A.06_Avaliable_90_2_06/Verdana-Apartments-Apartment_6006.000.svg',
-        '/images/24-HD-SVG/Image_A.07_Avaliable_90_2_10/Verdana-Apartments-Apartment_10006.000.svg',
-'/images/24-HD-SVG/Image_A.07_Avaliable_110_3_12/Verdana-Apartments-Apartment_12007.000.svg',
-        '/images/24-HD-SVG/Image_A.08_Avaliable_110_3_03/Verdana-Apartments-Apartment_3008.000.svg',
-        '/images/24-HD-SVG/Image_A.09_Avaliable_90_2_06/Verdana-Apartments-Apartment_3008.000.svg',
-        '/images/24-HD-SVG/Image_A.10_Avaliable_90_2_05/Verdana-Apartments-Apartment_5010.000.svg',
-      ],
-    },
-    {
-      jpg: '/images/jpg/image2.jpg',
-      svgs: [
-        '/images/24-HD-SVG/image1/overlay2.svg',
-        '/images/24-HD-SVG/image2/overlay2.svg',
-        '/images/24-HD-SVG/image3/overlay2.svg',
-        // Add more paths as needed
-      ],
-    },
-    // Add more mappings for other images
-  ];
 
   // Handle mouse events for drag simulation
   useEffect(() => {
