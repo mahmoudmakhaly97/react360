@@ -1,19 +1,73 @@
- import React360Viewer from 'react-360-view';
+ import  { useState, useRef, useEffect } from 'react';
+import React360Viewer from 'react-360-view';
 
 const Building360View = () => {
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const viewerRef = useRef(null);
+  const isDragging = useRef(false);
+
+  // Generate image paths and corresponding SVG overlays
+  const imagePaths = Array.from({ length: 24 }, (_, index) => ({
+    jpg: `/images/jpg/image${index + 1}.jpg`,
+    svgs: Array.from({ length: 9 }, (_, i) => `/images/svg/image${i + 1}/overlay${index + 1}.svg`),
+  }));
+
+  // Handle mouse events for drag simulation
+  useEffect(() => {
+    const handleMouseDown = () => {
+      isDragging.current = true;
+    };
+
+    const handleMouseMove = (event) => {
+      if (isDragging.current && viewerRef.current) {
+        // Calculate the new image index based on mouse movement
+        // Replace this logic with the actual calculation
+        const index = Math.floor((event.clientX / window.innerWidth) * 24); // Example logic
+        setCurrentImageIndex(index % 24); // Ensure index is within bounds
+      }
+    };
+
+    const handleMouseUp = () => {
+      isDragging.current = false;
+    };
+
+    window.addEventListener('mousedown', handleMouseDown);
+    window.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener('mouseup', handleMouseUp);
+
+    return () => {
+      window.removeEventListener('mousedown', handleMouseDown);
+      window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('mouseup', handleMouseUp);
+    };
+  }, []);
+
   return (
     <div className="three-sixty-container">
       <React360Viewer
-        amount={24} // number of images
-        imagePath="/images/jpg" // path to your images
-        fileName="image{index}.jpg" // file name pattern, where {index} will be replaced by the image number
-          speed={50000} // optional: to control the speed of rotation
-              />
+        ref={viewerRef}
+        amount={24} // Number of images
+        imagePath="/images/jpg" // Path to your images
+        fileName="image{index}.jpg" // File name pattern
+        speed={50000} // Speed of rotation
+      />
+      <div className="overlay-container">
+        {imagePaths[currentImageIndex]?.svgs.map((svgSrc, idx) => (
+          <img
+            key={idx}
+            src={svgSrc}
+            alt={`Overlay ${idx}`}
+            className="overlay-image"
+            style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'cover' }}
+          />
+        ))}
+      </div>
     </div>
   );
 };
 
 export default Building360View;
+
 //.................................................
 
 // import React, { useState, useRef, useEffect } from 'react';
