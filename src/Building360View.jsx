@@ -9,7 +9,7 @@ const Building360View = () => {
   // Generate image paths and corresponding SVG overlays
   const imagePaths = Array.from({ length: 24 }, (_, index) => ({
     jpg: `/images/jpg/image${index + 1}.jpg`,
-    svgs: Array.from({ length: 9 }, (_, i) => `/images/svg/image${i + 1}/overlay${index + 1}.svg`),
+    svgs: Array.from({ length: 9 }, (_, i) => `/images/24-HD-SVG/image${i + 1}/overlay${index + 1}.svg`),
   }));
 
   // Handle mouse events for drag simulation
